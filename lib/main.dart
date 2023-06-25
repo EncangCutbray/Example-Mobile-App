@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:project/app.dart';
 
 import 'package:flutter/material.dart';
@@ -9,21 +10,28 @@ import 'package:project/injection.dart' as di;
 import 'package:project/project_observer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() async{
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
-  SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
-  
+  ByteData data =
+      await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext
+      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+
   bool isMyApp = false;
 
-  /// CounterObserver for logging
+  /// ProjectObserver for logging
   Bloc.observer = const ProjectObserver();
 
-  /// Registation dependencies 
+  /// Registation dependencies
   di.Injection();
-  
+
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
+
   // ignore: dead_code
   runApp(isMyApp ? const MyApp() : const App());
 }

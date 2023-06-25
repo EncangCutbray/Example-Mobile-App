@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class BannerExample extends StatelessWidget {
-  const BannerExample({super.key});
+
+  final Function? onBannerTap;
+
+  final String? title;
+
+  const BannerExample({super.key, this.onBannerTap, this.title = 'Banner Here'});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:() => context.go('/home/banner'),
+      onTap:() => onBannerTap is Function ? onBannerTap: context.go('/home/banner'),
       child: Container(
         width: double.infinity,
         margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -16,7 +21,8 @@ class BannerExample extends StatelessWidget {
           color: Colors.amber,
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
         ),
-        child: const Center(child: Text('Banner Here', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)),
+        child:  Center(child: Text(
+          title is String ? title.toString():  '' , style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/home_details/timer/presentation/bloc/timer_bloc.dart';
 import 'package:project/features/home/presentation/bloc/home_view_bloc.dart';
 import 'package:project/features/home/presentation/bloc/home_view_event.dart';
 import 'package:project/features/courses/presentation/bloc/course_bloc.dart';
@@ -18,6 +19,7 @@ import 'package:project/courses/cubit/course_cubit.dart';
 import 'package:project/courses/models/course_model.dart';
 import 'package:project/courses/view/course_view.dart';
 import 'package:project/example/example_view.dart';
+
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -106,7 +108,10 @@ class App extends StatelessWidget {
             },
           ),
           BlocProvider(
-            create: (_) => di.locator<HomeViewBloc>()..add(OnPageLoaded(1)),
+            create: (_) => di.locator<HomeViewBloc>()..add(OnPageLoaded(0)),
+          ),
+           BlocProvider(
+            create: (_) => di.locator<TimerBloc>(),
           ),
         ],
         child: MaterialApp.router(

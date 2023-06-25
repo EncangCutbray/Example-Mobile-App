@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/features/home/presentation/widgets/banner_example.dart';
+import 'package:project/features/home/presentation/widgets/learn_bloc.dart';
 import 'package:project/features/home/presentation/widgets/learn_languange.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,28 +14,35 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.only(top: 10)),
-            BannerExample(),
-            Padding(padding: EdgeInsets.only(top: 10)),
-            LearnLanguange(
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            BannerExample(
+              title: 'Bloc Example',
+              onBannerTap: () {},
+            ),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            LearnBloc(),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            const BannerExample(),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            const LearnLanguange(
               flagUrl:
                   'https://ducc.pythonanywhere.com/static/images/flags/ru-f.png',
               title: 'Booking a new rocket? Just clicked',
             ),
-            Padding(padding: EdgeInsets.only(top: 10)),
-            BannerExample(),
-            Padding(padding: EdgeInsets.only(top: 10)),
-            LearnLanguange(
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            const BannerExample(),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            const LearnLanguange(
               flagUrl:
                   'https://ducc.pythonanywhere.com/static/images/flags/kp-f.png',
               title: 'Start war journey, Only one clicked',
             ),
-            Padding(padding: EdgeInsets.only(top: 10)),
-            BannerExample(),
-            Padding(padding: EdgeInsets.only(top: 10)),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            const BannerExample(),
+            const Padding(padding: EdgeInsets.only(top: 10)),
           ],
         ),
       ),

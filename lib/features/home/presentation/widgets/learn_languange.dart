@@ -55,10 +55,20 @@ class LearnLanguange extends StatelessWidget {
                         Expanded(
                           child: InkWell(
                             onTap: () => context.go('/home/flag'),
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.white,
-                              child: Image.network(flagUrl, fit: BoxFit.fill),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.grey.shade100,
+                                  width: 2.5,
+                                ),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    flagUrl,
+                                  ),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
                             ),
                           ),
                         ),
