@@ -7,7 +7,7 @@ import 'package:project/features/home_details/timer/presentation/bloc/timer_even
 import 'package:project/features/home_details/timer/presentation/bloc/timer_state.dart';
 
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
-  static const int _duration = 60;
+  static const int _duration = 5;
   final TickerUseCase _ticker;
 
   StreamSubscription<int>? _tickerSubscription;
@@ -38,9 +38,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   }
 
   void _onStarted(TimerStarted event, Emitter<TimerState> emit) {
-    print(event.duration);
     emit(TimerRunInProgress(event.duration));
-    _tickerSubscription?.cancel();
+    // _tickerSubscription?.cancel();
     _tickerSubscription = _ticker.tick(ticks: event.duration).listen(
           (duration) => add(TimerTicked(duration: duration)),
         );
@@ -65,5 +64,4 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     }
   }
 
-  // void _onTicked(_TimerTicked event, Emitter<TimerState> emit) {}
 }
