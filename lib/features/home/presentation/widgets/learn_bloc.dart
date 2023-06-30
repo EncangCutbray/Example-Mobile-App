@@ -8,7 +8,8 @@ class LearnBloc extends StatelessWidget {
 
   final List<Map<String, String>> listOfLearning = [
     {'route': '/home/counter', 'title': 'Counter'},
-    {'route': '/home/timer', 'title': 'Timer'}
+    {'route': '/home/timer', 'title': 'Timer'},
+    {'route': '/home/weather', 'title': 'Weather'}
   ];
 
   @override

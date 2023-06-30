@@ -1,4 +1,6 @@
 // ignore_for_file: dead_code
+import 'package:project/features/courses/presentation/bloc/course_event.dart';
+import 'package:project/features/home_details/counter/presentation/bloc/counter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +17,6 @@ import 'package:go_router/go_router.dart';
 import 'package:project/injection.dart' as di;
 import 'package:project/core/cubit/route_cubit.dart';
 import 'package:project/core/widgets/navigation_bar_app.dart';
-
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -45,12 +46,11 @@ class App extends StatelessWidget {
               ),
               GoRoute(
                 path: '/blank-2',
-                pageBuilder: (context, state) => const NoTransitionPage(
-                    child: BlankPage(title: "Blank 2")),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: BlankPage(title: "Blank 2")),
               )
             ],
           ),
-          
         ]);
   }
 
@@ -73,20 +73,22 @@ class App extends StatelessWidget {
       /// Multiple Bloc In Root Application
       return MultiBlocProvider(
         providers: [
-          
-          BlocProvider<RouteCubit>(create: (BuildContext context) {
-            return RouteCubit(RoutesModel.fromJson({}))..routes();
-          }),
+          BlocProvider<RouteCubit>(
+            create: (BuildContext context) =>
+                RouteCubit(RoutesModel.fromJson({}))..routes(),
+          ),
           BlocProvider(
-            create: (BuildContext context) {
-              // return di.locator<CourseBloc>()..add(const OnCourseLoaded());
-              return di.locator<CourseBloc>();
-            },
+            create: (BuildContext context) =>
+                true ? di.locator<CourseBloc>() : di.locator<CourseBloc>()
+                  ..add(const OnCourseLoaded()),
           ),
           BlocProvider(
             create: (_) => di.locator<HomeViewBloc>()..add(OnPageLoaded(0)),
           ),
-           BlocProvider(
+          BlocProvider(
+            create: (_) => di.locator<CounterBloc>(),
+          ),
+          BlocProvider(
             create: (_) => di.locator<TimerBloc>(),
           ),
         ],

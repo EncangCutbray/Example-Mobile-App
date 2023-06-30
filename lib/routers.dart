@@ -6,6 +6,7 @@ import 'package:project/features/blank/presentation/pages/blank_page.dart';
 import 'package:project/features/courses/presentation/pages/course_page.dart';
 import 'package:project/features/home_details/counter/presentation/pages/counter_page.dart';
 import 'package:project/features/home_details/timer/presentation/pages/timer_page.dart';
+import 'package:project/features/home_details/weather/presentation/pages/weather_page.dart';
 
 class Routes extends GoRouter {
   final List<RouteBase> routesApp;
@@ -14,10 +15,16 @@ class Routes extends GoRouter {
 
   final String? initialLocationApp;
 
-  Routes({required this.routesApp, this.keyNavigatorApp, this.initialLocationApp})
-      : super(routes: routesApp, navigatorKey: keyNavigatorApp, initialLocation: initialLocationApp);
+  Routes(
+      {required this.routesApp, this.keyNavigatorApp, this.initialLocationApp})
+      : super(
+            routes: routesApp,
+            navigatorKey: keyNavigatorApp,
+            initialLocation: initialLocationApp);
 
   factory Routes.app() {
+    const bool debugApp = true;
+
     final keyNavigatorApp = GlobalKey<NavigatorState>();
 
     // ignore: unused_local_variable
@@ -32,7 +39,8 @@ class Routes extends GoRouter {
         GoRoute(
             path: '/',
             builder: (BuildContext context, GoRouterState state) {
-              return const HomeView();
+              // ignore: dead_code
+              return debugApp ? const CounterPage() : const HomeView();
             },
             routes: <RouteBase>[
               GoRoute(
@@ -65,6 +73,12 @@ class Routes extends GoRouter {
                   return const TimerPage(
                     title: 'Time Page',
                   );
+                },
+              ),
+              GoRoute(
+                path: 'home/weather',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const WeatherPage();
                 },
               )
             ]),
